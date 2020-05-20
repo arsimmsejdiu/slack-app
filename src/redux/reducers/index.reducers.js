@@ -1,0 +1,56 @@
+import * as actionTypes from "../actions/types.actions";
+import { combineReducers } from "redux";
+
+// Global States
+const initialUserState = {
+  currentUser: null,
+  isLoading: true,
+};
+
+const initialChannelState = {
+  currentChannel: null,
+  isPrivateChannel: false,
+};
+
+/* User Reducer */
+const userReducer = (state = initialUserState, action) => {
+  switch (action.type) {
+    case actionTypes.SET_USER:
+      return {
+        currentUser: action.payload.currentUser,
+        isLoading: false,
+      };
+    case actionTypes.CLEAR_USER:
+      return {
+        ...state,
+        isLoading: false,
+      };
+    default:
+      return state;
+  }
+};
+
+/* Channel Reducer */
+const channelReducer = (state = initialChannelState, action) => {
+  switch (action.type) {
+    case actionTypes.SET_CURRENT_CHANNEL:
+      return {
+        ...state,
+        currentChannel: action.payload.currentChannel,
+      };
+    case actionTypes.SET_PRIVATE_CHANNEL:
+      return {
+        ...state,
+        isPrivateChannel: action.payload.isPrivateChannel,
+      };
+    default:
+      return state;
+  }
+};
+
+const rootReducers = combineReducers({
+  user: userReducer,
+  channel: channelReducer,
+});
+
+export default rootReducers;

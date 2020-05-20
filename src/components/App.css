@@ -1,0 +1,58 @@
+html,
+body .app {
+  height: 100vh;
+  background: #eee;
+  padding: 1em;
+}
+
+.add {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add:hover {
+  color: antiquewhite;
+  transform: scale(1.4);
+}
+
+/* side-panel.component.jsx */
+.menu {
+  padding-bottom: 2em;
+}
+
+/* Messages.component.jsx */
+.messages {
+  height: 68vh;
+  overflow-y: scroll;
+}
+
+.messages__progress {
+  height: 58vh;
+  overflow-y: scroll;
+}
+
+/* messages-form.component.jsx */
+.messages__form {
+  position: fixed !important;
+  bottom: 1rem;
+  margin-left: 320px !important;
+  left: 0;
+  right: 1rem;
+  z-index: 200;
+}
+
+/* message.component.jsx */
+.message__self {
+  border-left: 2px solid orange;
+  padding-left: 8px;
+}
+
+.message__image {
+  padding: 1em;
+}
+
+/* progress-bar.component.jsx */
+
+.progress__bar {
+  margin: 0.3em 0 0 0 !important;
+}
