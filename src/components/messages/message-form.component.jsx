@@ -8,7 +8,8 @@ import ProgressBar from "./progress-bar.component";
 
 class MessageForm extends Component {
   state = {
-    storageRef: firebase.storage().ref("image"),
+    storageRef: firebase.storage().ref(),
+    typingRef: firebase.database().ref("typing"),
     uploadTask: null,
     uploadState: "",
     percentUploaded: 0,
@@ -18,6 +19,16 @@ class MessageForm extends Component {
     loading: false,
     errors: [],
     modal: false,
+  };
+
+  handleKeyDown = () => {
+    const { message, typingRef, channel, user } = this.state;
+
+    if (message) {
+      typingRef.child(channel.id).child(user.uid).set(user.displayName);
+    } else {
+      typingRef.child(channel.id).child(user.uid).remove();
+    }
   };
 
   openModal = () => this.setState({ modal: true });
@@ -47,7 +58,7 @@ class MessageForm extends Component {
   sendMessage = () => {
     //destructure from state
     const { getMessagesRef } = this.props;
-    const { message, channel } = this.state;
+    const { message, channel, user , typingRef } = this.state;
 
     if (message) {
       //send message
@@ -58,6 +69,7 @@ class MessageForm extends Component {
         .set(this.createMessage())
         .then(() => {
           this.setState({ loading: false, message: "", errors: [] });
+          typingRef.child(channel.id).child(user.uid).remove();
         })
         .catch((err) => {
           console.error(err);
@@ -161,6 +173,7 @@ class MessageForm extends Component {
           fluid
           name="message"
           value={message}
+          onKeyDown={this.handleKeyDown}
           onChange={this.handleChage}
           style={{ marginBottom: "0.7em" }}
           label={<Button icon="add" />}
