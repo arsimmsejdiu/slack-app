@@ -56,4 +56,4 @@ const mapStatetoProps = (state) => ({
 
 export default connect(mapStatetoProps)(App);
 
-// TODO: 17. Adding Emoji Picker, Loading Skeleton, Automatic Scroll to Bottom, Key Shortcuts
+// TODO: 00:02:52 18. 1. Remove Listeners upon Component Unmount

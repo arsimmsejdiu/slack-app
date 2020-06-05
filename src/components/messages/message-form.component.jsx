@@ -24,13 +24,30 @@ class MessageForm extends Component {
     emojiPicker: false,
   };
 
-  handleKeyDown = () => {
+  componentWillUnmount() {
+    if(this.state.uploadTask !== null) {
+      this.state.uploadTask.cancel();
+      this.setState({ uploadTask: null });
+    } 
+  }
+
+  handleKeyDown = event => {
+    if (event.ctrlKey && event.keyCode === 13) {
+      this.sendMessage();
+    }
+
     const { message, typingRef, channel, user } = this.state;
 
     if (message) {
-      typingRef.child(channel.id).child(user.uid).set(user.displayName);
+      typingRef
+        .child(channel.id)
+        .child(user.uid)
+        .set(user.displayName);
     } else {
-      typingRef.child(channel.id).child(user.uid).remove();
+      typingRef
+        .child(channel.id)
+        .child(user.uid)
+        .remove();
     }
   };
 
