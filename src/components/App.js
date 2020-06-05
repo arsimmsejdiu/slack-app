@@ -56,4 +56,4 @@ const mapStatetoProps = (state) => ({
 
 export default connect(mapStatetoProps)(App);
 
-// 15. Change and Edit User Avatar Images
+// TODO: 17. Adding Emoji Picker, Loading Skeleton, Automatic Scroll to Bottom, Key Shortcuts

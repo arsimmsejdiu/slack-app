@@ -41,6 +41,11 @@ body .app {
   z-index: 200;
 }
 
+.emojipicker{
+  position: absolute;
+  margin-bottom: 20px;
+}
+
 /* message.component.jsx */
 .message__self {
   border-left: 2px solid orange;
